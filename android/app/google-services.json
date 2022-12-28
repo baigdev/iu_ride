@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "261429549781",
+    "project_id": "ride-sharing-app-dff69",
+    "storage_bucket": "ride-sharing-app-dff69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261429549781:android:c616bc59af3b08e3a7e05c",
+        "android_client_info": {
+          "package_name": "com.car_pooling_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261429549781-bht50gha7qk0oq02nau15h3hjqsp3u5e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.car_pooling_app",
+            "certificate_hash": "6a25fcd396edba6506cbc4fa930ce916b90b0d5f"
+          }
+        },
+        {
+          "client_id": "261429549781-1dfh15h54gvl2kmm88h5rnbcce2k5rci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGyIl2rzdkLts2loUNRg3megTkKXDfcR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261429549781-1dfh15h54gvl2kmm88h5rnbcce2k5rci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
