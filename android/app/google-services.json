@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "261429549781-bht50gha7qk0oq02nau15h3hjqsp3u5e.apps.googleusercontent.com",
+          "client_id": "261429549781-1ud16f62n04pudmrm81bl4rlk04pttv4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.car_pooling_app",
-            "certificate_hash": "6a25fcd396edba6506cbc4fa930ce916b90b0d5f"
+            "certificate_hash": "70167f21fdd6076beec466dccee5db604aa94506"
           }
         },
         {

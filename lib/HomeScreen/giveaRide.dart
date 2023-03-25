@@ -53,6 +53,9 @@ class _FindaRideState extends State<FindaRide> {
   bool showStartingScreen = true;
   bool isTouchable = false;
 
+  //Focus Node For Price Field
+  FocusNode node = FocusNode();
+
   //firestore instancce
   final _firestore = FirebaseFirestore.instance;
 
@@ -121,9 +124,8 @@ class _FindaRideState extends State<FindaRide> {
     _createMarkerImageFromAsset("assets/locationpin.png");
 
     //calling marker function
-
-    await getMarkerData();
     await fetchData();
+    await getMarkerData();
   }
 
   @override
@@ -173,6 +175,7 @@ class _FindaRideState extends State<FindaRide> {
         .getStringValue("userName")
         .then((value) => setState(() {
               name = value;
+              print("Name fetched $value");
             }));
     MySharedPreferences.instance
         .getStringValue("userBranch")
@@ -201,21 +204,21 @@ class _FindaRideState extends State<FindaRide> {
             }));
   }
 
-  // void initMarker(specify, specifyID) async {
-  //   var markerIdval = specifyID;
-  //   final MarkerId markerId = MarkerId(markerIdval);
-  //   final Marker marker = Marker(
-  //     markerId: markerId,
-  //     icon: bitmapImage,
-  //     position: LatLng(specify['locationpoint'].latitude,
-  //         specify['locationpoint'].longitude),
-  //     infoWindow:
-  //         InfoWindow(title: specify['username'], snippet: specify['address']),
-  //   );
-  //   setState(() {
-  //     markers[markerId] = marker;
-  //   });
-  // }
+  void initMarker(specify, specifyID) async {
+    var markerIdval = specifyID;
+    final MarkerId markerId = MarkerId(markerIdval);
+    final Marker marker = Marker(
+      markerId: markerId,
+      icon: bitmapImage,
+      position: LatLng(specify['locationpoint'].latitude,
+          specify['locationpoint'].longitude),
+      infoWindow:
+          InfoWindow(title: specify['username'], snippet: specify['address']),
+    );
+    setState(() {
+      markers[markerId] = marker;
+    });
+  }
 
   getMarkerData() async {
     await FirebaseFirestore.instance
@@ -224,7 +227,7 @@ class _FindaRideState extends State<FindaRide> {
         .then((QuerySnapshot snapshot) {
       if (snapshot.docs.isNotEmpty) {
         for (int i = 0; i < snapshot.docs.length; i++) {
-          // initMarker(snapshot.docs[i].data(), snapshot.docs[i].id);
+          initMarker(snapshot.docs[i].data(), snapshot.docs[i].id);
         }
       }
     });
@@ -395,8 +398,9 @@ class _FindaRideState extends State<FindaRide> {
   }
 
   //the method called when the user presses the create button
-  _onCreatePressed() {
+  _onCreatePressed() async {
     print("on create pressed");
+    await fetchData();
     if (_areFieldsFilled()) {
       to = _controller.text;
       Alert(
@@ -411,21 +415,21 @@ class _FindaRideState extends State<FindaRide> {
                     backgroundImage: AssetImage("assets/accountAvatar.jpg"),
                   ),
                   title: Text(
-                    "Name: " + name,
+                    "Name: $name",
                     style: const TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Row(
                     children: <Widget>[
                       Text(
-                        "Branch: " + branch,
+                        "Branch: $branch",
                         style: const TextStyle(
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Text(
-                        "Year: " + year,
+                        "Year: $year",
                         style: const TextStyle(
                           color: Colors.black,
                         ),
@@ -466,9 +470,14 @@ class _FindaRideState extends State<FindaRide> {
                   ),
                   title: TextField(
                     controller: _setPriceController,
+                    onChanged: (v) {
+                      price = v;
+                    },
+                    focusNode: node,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
+                      hintText: "Price",
                     ),
                   ),
                   trailing: TextButton(
@@ -478,7 +487,7 @@ class _FindaRideState extends State<FindaRide> {
                     ),
                     onPressed: () {
                       _showToast("Price Requested");
-                      FocusScope.of(context).requestFocus(null);
+                      FocusScope.of(context).requestFocus(node);
                       setState(() {
                         price = _setPriceController.text;
                       });

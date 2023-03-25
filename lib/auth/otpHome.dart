@@ -40,19 +40,19 @@ class _OtpHomeState extends State<OtpHome> {
             Stack(
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                  child: const Text('Share',
+                  padding: const EdgeInsets.fromLTRB(15.0, 70.0, 0.0, 0.0),
+                  child: const Text('IU',
                       style: TextStyle(
-                          fontSize: 70.0, fontWeight: FontWeight.bold)),
+                          fontSize: 50.0, fontWeight: FontWeight.bold)),
                 ),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(16.0, 175.0, 0.0, 0.0),
-                  child: const Text('MyRide',
+                  padding: const EdgeInsets.fromLTRB(16.0, 140.0, 0.0, 0.0),
+                  child: const Text('Ride Sharing',
                       style: TextStyle(
-                          fontSize: 70.0, fontWeight: FontWeight.bold)),
+                          fontSize: 50.0, fontWeight: FontWeight.bold)),
                 ),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(255.0, 165.0, 0.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(310.0, 110.0, 0.0, 0.0),
                   child: const Text('.',
                       style: TextStyle(
                           fontSize: 80.0,
@@ -118,7 +118,7 @@ class _OtpHomeState extends State<OtpHome> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Text(
-                  "©2022, IU Ride",
+                  "©2023, IU Ride",
                   style: TextStyle(color: Colors.grey),
                 ),
               ),

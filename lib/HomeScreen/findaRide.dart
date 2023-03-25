@@ -87,26 +87,29 @@ class RideStream extends StatelessWidget {
           final rideVehicleNo = data['vechicleno'];
           final timeStamp = data['timestamp'];
           return RideDetailCard(
-            rideSender: rideSender ?? "",
-            rideDestination: rideDestination ?? "",
-            rideTime: rideTime ?? "",
-            ridePrice: ridePrice ?? "",
-            ridePhone: ridePhone ?? "",
-            rideUPI: rideUPI ?? "",
-            rideVehicleNo: rideVehicleNo ?? "",
-            timestamp: timeStamp ?? "",
-            isMe: true,
-            // ridePhone == phone ,
+            rideSender: rideSender ?? "No sender found",
+            rideDestination: rideDestination ?? "No destination found",
+            rideTime: rideTime ?? "No time found",
+            ridePrice: ridePrice ?? "No price found",
+            ridePhone: ridePhone ?? "No phone found",
+            rideUPI: rideUPI ?? "No UPI found",
+            rideVehicleNo: rideVehicleNo ?? "No Vehicle found",
+            timestamp: timeStamp ?? "No time found",
+            isMe: ridePhone == phone,
           );
         }).toList();
 
         return Expanded(
-          child: ListView(
-            reverse: true,
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-            children: rideWidgets,
-          ),
+          child: rideWidgets.isEmpty
+              ? const Center(
+                  child: Text("No data found"),
+                )
+              : ListView(
+                  reverse: true,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 20.0),
+                  children: rideWidgets,
+                ),
         );
       },
     );

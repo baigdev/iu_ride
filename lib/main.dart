@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Share MyRide',
+      title: 'IU Ride',
       //test phase
       home: screen,
       routes: {

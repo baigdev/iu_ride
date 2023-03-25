@@ -12,7 +12,11 @@ class BackendService {
 
 class CitiesService {
   static final List<String> predictionList = [
-    "Gulshan",
+    "Shaheed-e-Millat Road",
+    "Clifton",
+    "Defence View",
+    "Univeristy Road",
+    "Tariq Road",
     "Gulistan e Johar",
     "Saadi Town",
   ];

@@ -203,7 +203,7 @@ class RideDetailCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  rideDestination!,
+                                  rideDestination ?? "",
                                   style: boldBlackLargeTextStyle,
                                 ),
                                 Text(
@@ -246,20 +246,24 @@ class RideDetailCard extends StatelessWidget {
                                     const SizedBox(
                                       width: 5.0,
                                     ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0, vertical: 1.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(1.0),
-                                        ),
-                                        border: Border.all(color: greyColor),
-                                      ),
-                                      child: Text(
-                                        rideVehicleNo!,
-                                        style: normalGreyTextStyle,
-                                      ),
-                                    )
+                                    rideVehicleNo?.isNotEmpty == true
+                                        ? Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 4.0, vertical: 1.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(1.0),
+                                              ),
+                                              border:
+                                                  Border.all(color: greyColor),
+                                            ),
+                                            child: Text(
+                                              rideVehicleNo!,
+                                              style: normalGreyTextStyle,
+                                            ),
+                                          )
+                                        : SizedBox.shrink(),
                                   ],
                                 ),
                               ],
@@ -311,22 +315,22 @@ class RideDetailCard extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 20),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      initiateTransaction();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.blue,
-                                      onPrimary: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(32.0),
-                                      ),
-                                    ),
-                                    child: const Text("PAY AND CONFIRM"),
-                                  ),
-                                  const SizedBox(height: 60),
+                                  // const SizedBox(width: 20),
+                                  // ElevatedButton(
+                                  //   onPressed: () {
+                                  //     initiateTransaction();
+                                  //   },
+                                  //   style: ElevatedButton.styleFrom(
+                                  //     primary: Colors.blue,
+                                  //     onPrimary: Colors.white,
+                                  //     shape: RoundedRectangleBorder(
+                                  //       borderRadius:
+                                  //           BorderRadius.circular(32.0),
+                                  //     ),
+                                  //   ),
+                                  //   child: const Text("PAY AND CONFIRM"),
+                                  // ),
+                                  // const SizedBox(height: 60),
                                 ],
                               ),
                       ),

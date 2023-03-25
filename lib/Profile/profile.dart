@@ -19,7 +19,7 @@ class _MyHomePageState extends State<ProfilePage> {
   String phone = "";
 
   @override
-  void initState()  {
+  void initState() {
     // TODO: implement initState
     super.initState();
     fetchData();
@@ -33,24 +33,23 @@ class _MyHomePageState extends State<ProfilePage> {
     MySharedPreferences.instance
         .getStringValue("userName")
         .then((value) => setState(() {
-         name = value;
-    }));
+              name = value;
+            }));
     MySharedPreferences.instance
         .getStringValue("userBranch")
         .then((value) => setState(() {
-      branch = value;
-    }));
+              branch = value;
+            }));
     MySharedPreferences.instance
         .getStringValue("userYear")
         .then((value) => setState(() {
-      year = value;
-    }));
+              year = value;
+            }));
     MySharedPreferences.instance
         .getStringValue("userPhone")
         .then((value) => setState(() {
-      phone = value;
-    }));
-
+              phone = value;
+            }));
   }
 
   @override
@@ -150,8 +149,9 @@ class _MyHomePageState extends State<ProfilePage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       _signOut();
-                      Navigator.pushNamed(context,'/otphome');
-                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      Navigator.pushNamed(context, '/otpHome');
+                      SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
                       await preferences.clear();
                     },
                     child: const Text(

@@ -19,13 +19,11 @@ class _SignUpState extends State<SignUp> {
   String? mob;
   //dropdown variables
   final List<String> _branch = [
-    'CSE',
-    'IT',
-    'ECE',
-    'EEE',
-    'EIE',
-    'MECH',
-    'AUTO',
+    'BS (SE)',
+    'BS (CS)',
+    "MS (CS)",
+    "BBA",
+    "MBA",
   ];
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -35,7 +33,7 @@ class _SignUpState extends State<SignUp> {
   String? phone;
   String? email;
   String? vehicleNo = '';
-  String branch = 'CSE';
+  String branch = 'BS (CS)';
   String year = '1';
   int carpool = 0;
   bool _isVisible = true;
