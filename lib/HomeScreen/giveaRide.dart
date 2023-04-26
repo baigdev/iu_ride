@@ -23,7 +23,8 @@ class FindaRide extends StatefulWidget {
 
 class _FindaRideState extends State<FindaRide> {
   //texxtediting
-  final _controller = TextEditingController();
+  final _fromController = TextEditingController();
+  final _toController = TextEditingController();
   final _setPriceController = TextEditingController();
 
   //Google map variables
@@ -38,10 +39,6 @@ class _FindaRideState extends State<FindaRide> {
   var inputFormat = DateFormat('h:mm a dd/MM/yyyy');
   String? price;
   late DateTime dateTime;
-
-  //Search/Create variables
-  String to = "";
-  //sharerideconfirmation variables
   String name = "";
   String year = "";
   String branch = "";
@@ -274,7 +271,12 @@ class _FindaRideState extends State<FindaRide> {
             height: 250.0,
             child: ListView(
               children: <Widget>[
-                _fillField("To: ", Colors.red, 10.0, Icons.location_pin),
+                _fillField("From: ", Colors.red, 10.0, Icons.location_pin,
+                    _fromController,
+                    isFrom: true),
+                _fillField(
+                    "To: ", Colors.red, 10.0, Icons.location_pin, _toController,
+                    isTo: true),
                 _dateField(),
               ],
             ),
@@ -288,7 +290,9 @@ class _FindaRideState extends State<FindaRide> {
     );
   }
 
-  Align _fillField(String str, Color clr, double top, IconData icon) {
+  Align _fillField(String str, Color clr, double top, IconData icon,
+      TextEditingController controller,
+      {bool isTo = false, bool isFrom = false}) {
     return Align(
       alignment: Alignment.topCenter,
       child: Padding(
@@ -296,7 +300,7 @@ class _FindaRideState extends State<FindaRide> {
         child: TypeAheadField(
           textFieldConfiguration: TextFieldConfiguration(
             autofocus: false,
-            controller: _controller,
+            controller: controller,
             decoration: InputDecoration(
               filled: true,
               prefixIcon: Icon(
@@ -318,7 +322,30 @@ class _FindaRideState extends State<FindaRide> {
             );
           },
           onSuggestionSelected: (String? suggestion) {
-            _controller.text = suggestion!;
+            if (isFrom && _toController.text.isNotEmpty) {
+              if (suggestion!.contains(_toController.text)) {
+                _showToast(
+                    "To and from can not be same please select different location");
+                return;
+              } else {
+                controller.text = suggestion;
+                return;
+              }
+            }
+
+            if (isTo && _fromController.text.isNotEmpty) {
+              if (suggestion!.contains(_fromController.text)) {
+                _showToast(
+                    "To and from can not be same please select different location");
+                return;
+              } else {
+                controller.text = suggestion;
+                return;
+              }
+            } else {
+              controller.text = suggestion!;
+              return;
+            }
           },
         ),
       ),
@@ -399,10 +426,8 @@ class _FindaRideState extends State<FindaRide> {
 
   //the method called when the user presses the create button
   _onCreatePressed() async {
-    print("on create pressed");
     await fetchData();
     if (_areFieldsFilled()) {
-      to = _controller.text;
       Alert(
           context: context,
           title: "Confirm Ride",
@@ -442,12 +467,36 @@ class _FindaRideState extends State<FindaRide> {
               Container(
                 // color: Colors.cyan,
                 child: ListTile(
-                  leading: const Icon(
-                    Icons.location_on,
-                    color: Colors.blue,
+                  leading: Text(
+                    "FROM",
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                   title: Text(
-                    _controller.text,
+                    _fromController.text,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    "Time : " + convertTimeTo12Hour(dateTime),
+                    style: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                // color: Colors.cyan,
+                child: ListTile(
+                  leading: Text(
+                    "TO",
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                  title: Text(
+                    _toController.text,
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -502,7 +551,8 @@ class _FindaRideState extends State<FindaRide> {
               onPressed: () {
                 _firestore.collection('rides').add({
                   'sender': name,
-                  'destination': to,
+                  "from": _fromController.text,
+                  'destination': _toController.text,
                   'ridetime': convertTimeTo12Hour(dateTime),
                   'price': price,
                   'phone': phone,
@@ -543,7 +593,7 @@ class _FindaRideState extends State<FindaRide> {
               ),
             )
           ]).show();
-      _controller.clear();
+      _toController.clear();
     }
   } //onCreatePressed
 
@@ -552,7 +602,7 @@ class _FindaRideState extends State<FindaRide> {
   }
 
   bool _areFieldsFilled() {
-    if (_controller.text.isEmpty) {
+    if (_toController.text.isEmpty) {
       _showToast("Missing 'To' field!");
       return false;
     }

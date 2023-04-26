@@ -74,10 +74,11 @@ class _MyHomePageState extends State<ProfilePage> {
             child: Container(color: Colors.black.withOpacity(1)),
           ),
           Positioned(
-            width: 350.0,
-            left: 5,
+            left: 0,
+            right: 0,
             top: MediaQuery.of(context).size.height / 7,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Hero(
                   tag: "profile",

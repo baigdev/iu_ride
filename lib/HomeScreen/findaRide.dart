@@ -79,6 +79,7 @@ class RideStream extends StatelessWidget {
           Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
           // final data = r.data();
           final rideSender = data['sender'];
+          final rideFrom = data["from"];
           final rideDestination = data['destination'];
           final rideTime = data['ridetime'];
           final ridePrice = data['price'];
@@ -89,8 +90,9 @@ class RideStream extends StatelessWidget {
           return RideDetailCard(
             rideSender: rideSender ?? "No sender found",
             rideDestination: rideDestination ?? "No destination found",
+            rideFrom: rideFrom ?? "No data found",
             rideTime: rideTime ?? "No time found",
-            ridePrice: ridePrice ?? "No price found",
+            ridePrice: ridePrice ?? "",
             ridePhone: ridePhone ?? "No phone found",
             rideUPI: rideUPI ?? "No UPI found",
             rideVehicleNo: rideVehicleNo ?? "No Vehicle found",

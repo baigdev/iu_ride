@@ -7,14 +7,12 @@ import 'Profile/profile.dart';
 import 'auth/otpHome.dart';
 import 'auth/otpPage.dart';
 import 'auth/registerUser.dart';
-import 'sharedPreferences/sharedPreferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
-  // var userName = MySharedPreferences.instance.setStringValue("userName", '');
   runApp(MyApp(screen: isLoggedIn ? HomeScreen() : const OtpHome()));
 }
 

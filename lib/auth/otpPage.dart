@@ -48,19 +48,19 @@ class OtpPageState extends State<OtpPage> {
           Stack(
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.fromLTRB(15.0, 60.0, 0.0, 0.0),
-                child: const Text('Share',
+                padding: const EdgeInsets.fromLTRB(15.0, 70.0, 0.0, 0.0),
+                child: const Text('IU',
                     style:
-                        TextStyle(fontSize: 70.0, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold)),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(16.0, 125.0, 0.0, 0.0),
-                child: const Text('MyRide',
+                padding: const EdgeInsets.fromLTRB(16.0, 140.0, 0.0, 0.0),
+                child: const Text('Ride Sharing',
                     style:
-                        TextStyle(fontSize: 70.0, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold)),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(255.0, 115.0, 0.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(310.0, 110.0, 0.0, 0.0),
                 child: const Text('.',
                     style: TextStyle(
                         fontSize: 80.0,

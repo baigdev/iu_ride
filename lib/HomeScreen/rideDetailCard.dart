@@ -8,6 +8,7 @@ import '../misc/themes.dart';
 
 class RideDetailCard extends StatelessWidget {
   final String? rideSender,
+      rideFrom,
       rideDestination,
       rideTime,
       ridePrice,
@@ -21,6 +22,7 @@ class RideDetailCard extends StatelessWidget {
       {super.key,
       this.rideSender,
       this.rideDestination,
+      this.rideFrom,
       this.rideTime,
       this.ridePrice,
       this.ridePhone,
@@ -179,172 +181,177 @@ class RideDetailCard extends StatelessWidget {
               borderRadius: const BorderRadius.all(
                 Radius.circular(4.0),
               ),
-              child: Stack(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Positioned(
-                    bottom: 5.0,
-                    right: 70.0,
-                    width: 120.0,
-                    child: Container(
-                      height: 120.0,
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16.0, bottom: 0.0, left: 16.0, right: 16.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 16.0, bottom: 0.0, left: 16.0, right: 16.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  rideDestination ?? "",
-                                  style: boldBlackLargeTextStyle,
-                                ),
-                                Text(
-                                  rideTime!,
-                                  style: normalGreyTextStyle,
-                                ),
-                              ],
+                            Text(
+                              "From",
+                              style: boldBlackLargeTextStyle,
                             ),
-                            const Spacer(),
-                            const ClipOval(
-                              child: Icon(
-                                Icons.account_circle_rounded,
-                                size: 45,
-                                color: Colors.blue,
-                              ),
+                            Text(
+                              rideFrom ?? "",
+                              style: boldBlackLargeTextStyle,
+                            ),
+                            Text(
+                              rideTime!,
+                              style: normalGreyTextStyle,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              "Destination",
+                              style: boldBlackLargeTextStyle,
+                            ),
+                            Text(
+                              rideDestination ?? "",
+                              style: boldBlackLargeTextStyle,
+                            ),
+                            Text(
+                              rideTime!,
+                              style: normalGreyTextStyle,
                             ),
                           ],
                         ),
-                      ),
-                      const Divider(),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 8.0, bottom: 0.0, left: 16.0, right: 16.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
+                        const Spacer(),
+                        const ClipOval(
+                          child: Icon(
+                            Icons.account_circle_rounded,
+                            size: 45,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 8.0, bottom: 0.0, left: 16.0, right: 16.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  rideSender!,
-                                  style: boldBlackLargeTextStyle,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      ridePhone!,
+                            Text(
+                              rideSender!,
+                              style: boldBlackLargeTextStyle,
+                            ),
+                            Text(
+                              ridePhone!,
+                              style: normalGreyTextStyle,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Vehicle Number",
+                              style: boldBlackLargeTextStyle,
+                            ),
+                            rideVehicleNo?.isNotEmpty == true
+                                ? Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0, vertical: 1.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(1.0),
+                                      ),
+                                      border: Border.all(color: greyColor),
+                                    ),
+                                    child: Text(
+                                      rideVehicleNo!,
                                       style: normalGreyTextStyle,
                                     ),
-                                    const SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    rideVehicleNo?.isNotEmpty == true
-                                        ? Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 4.0, vertical: 1.0),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(1.0),
-                                              ),
-                                              border:
-                                                  Border.all(color: greyColor),
-                                            ),
-                                            child: Text(
-                                              rideVehicleNo!,
-                                              style: normalGreyTextStyle,
-                                            ),
-                                          )
-                                        : SizedBox.shrink(),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Text(
-                              "PKR $ridePrice",
-                              style: const TextStyle(
-                                  fontSize: 28, fontWeight: FontWeight.bold),
-                            ),
+                                  )
+                                : SizedBox.shrink(),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      const SizedBox(
-                        height: 16.0,
-                      ),
-                      const Divider(
-                        color: Colors.black,
-                        height: 0.0,
-                      ),
-                      Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(12.0),
-                        child: isMe!
-                            ? Row(
-                                children: const [
-                                  Text("Ride Submitted"),
-                                ],
-                              )
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  ElevatedButton.icon(
-                                    icon: const Icon(Icons.call),
-                                    label: const Text("CALL"),
-                                    onPressed: () async {
-                                      FlutterPhoneDirectCaller.callNumber(
-                                          "$ridePhone");
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.blue,
-                                      onPrimary: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(32.0),
-                                      ),
-                                    ),
-                                  ),
-                                  // const SizedBox(width: 20),
-                                  // ElevatedButton(
-                                  //   onPressed: () {
-                                  //     initiateTransaction();
-                                  //   },
-                                  //   style: ElevatedButton.styleFrom(
-                                  //     primary: Colors.blue,
-                                  //     onPrimary: Colors.white,
-                                  //     shape: RoundedRectangleBorder(
-                                  //       borderRadius:
-                                  //           BorderRadius.circular(32.0),
-                                  //     ),
-                                  //   ),
-                                  //   child: const Text("PAY AND CONFIRM"),
-                                  // ),
-                                  // const SizedBox(height: 60),
-                                ],
-                              ),
-                      ),
-                    ],
+                        const Spacer(),
+                        Text(
+                          "PKR $ridePrice",
+                          style: const TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 225.0, left: 280),
-                    child: Text(
-                      DateFormat('h:mm a').format(dateTime),
-                      style: TextStyle(
-                        fontSize: 10.0,
-                        color: Colors.black.withOpacity(0.5),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        DateFormat('h:mm a').format(dateTime),
+                        style: TextStyle(
+                          fontSize: 10.0,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
                       ),
                     ),
+                  ),
+                  const Divider(
+                    color: Colors.black,
+                    height: 0.0,
+                  ),
+                  Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(12.0),
+                    child: isMe!
+                        ? Row(
+                            children: const [
+                              Text("Ride Submitted"),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: ElevatedButton.icon(
+                                  icon: const Icon(Icons.call),
+                                  label: const Text("CALL"),
+                                  onPressed: () async {
+                                    FlutterPhoneDirectCaller.callNumber(
+                                        "$ridePhone");
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue,
+                                    onPrimary: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(32.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              // const SizedBox(width: 20),
+                              // ElevatedButton(
+                              //   onPressed: () {
+                              //     initiateTransaction();
+                              //   },
+                              //   style: ElevatedButton.styleFrom(
+                              //     primary: Colors.blue,
+                              //     onPrimary: Colors.white,
+                              //     shape: RoundedRectangleBorder(
+                              //       borderRadius:
+                              //           BorderRadius.circular(32.0),
+                              //     ),
+                              //   ),
+                              //   child: const Text("PAY AND CONFIRM"),
+                              // ),
+                              // const SizedBox(height: 60),
+                            ],
+                          ),
                   ),
                 ],
               ),

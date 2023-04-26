@@ -148,7 +148,7 @@ class _SignUpState extends State<SignUp> {
                   // Branch
                   Row(
                     children: <Widget>[
-                      const Text("Branch: ", style: TextStyle(fontSize: 17.0)),
+                      const Text("Degree: ", style: TextStyle(fontSize: 17.0)),
                       const Padding(padding: EdgeInsets.all(5.0)),
                       DropdownButton<String>(
                         value: branch,
