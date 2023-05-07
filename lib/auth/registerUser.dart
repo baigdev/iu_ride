@@ -37,13 +37,23 @@ class _SignUpState extends State<SignUp> {
   String year = '1';
   int carpool = 0;
   bool _isVisible = true;
+  final regex = RegExp("^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@iqra.edu.pk*\$");
 
   bool _areFieldsFilled() {
+    if (email != null) {
+      if (!(regex.hasMatch(email!))) {
+        _showToast("Invalid email address.\nhint:Domain must be iqra.edu.pk");
+        return false;
+      }
+    } else {
+      _showToast("email is required");
+      return false;
+    }
+
     if (_controller.text.isEmpty) {
       _showToast("Name is required");
       return false;
     }
-
     return true;
   }
 
@@ -55,19 +65,19 @@ class _SignUpState extends State<SignUp> {
   }
 
   void saveUserInfo() async {
-    uid = FirebaseAuth.instance.currentUser!.uid;
-    phone = FirebaseAuth.instance.currentUser!.phoneNumber;
-    await UserDatabaseService(uid: uid!)
-        .updateUserData(name!, email!, branch, year, carpool, vehicleNo!);
+    // uid = FirebaseAuth.instance.currentUser!.uid;
+    // phone = FirebaseAuth.instance.currentUser!.phoneNumber;
+    // await UserDatabaseService(uid: uid!)
+    //     .updateUserData(name!, email!, branch, year, carpool, vehicleNo!);
     // print("stored user details in firestore");
 
     //save user id from response in local storage
 
     MySharedPreferences.instance.setStringValue("userName", name!);
-    MySharedPreferences.instance.setStringValue("userPhone", phone!);
+    MySharedPreferences.instance.setStringValue("userPhone", phone ?? "");
     MySharedPreferences.instance.setStringValue("userBranch", branch);
-    MySharedPreferences.instance.setStringValue("vechicleno", vehicleNo!);
-    MySharedPreferences.instance.setStringValue("email", email!);
+    MySharedPreferences.instance.setStringValue("vechicleno", vehicleNo ?? "");
+    MySharedPreferences.instance.setStringValue("email", email ?? "");
     MySharedPreferences.instance.setStringValue("userYear", year);
     MySharedPreferences.instance.setBoolValue("isLoggedIn", true);
     MySharedPreferences.instance.setIntValue("carpool", carpool);

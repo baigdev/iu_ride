@@ -17,6 +17,7 @@ class _MyHomePageState extends State<ProfilePage> {
   String year = "";
   String branch = "";
   String phone = "";
+  String email = "";
 
   @override
   void initState() {
@@ -49,6 +50,11 @@ class _MyHomePageState extends State<ProfilePage> {
         .getStringValue("userPhone")
         .then((value) => setState(() {
               phone = value;
+            }));
+    MySharedPreferences.instance
+        .getStringValue("email")
+        .then((value) => setState(() {
+              email = value;
             }));
   }
 
@@ -129,12 +135,40 @@ class _MyHomePageState extends State<ProfilePage> {
                   ],
                 ),
                 const SizedBox(height: 30),
-                Text(
-                  'Phone: $phone',
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    // fontWeight: FontWeight.bold,
-                  ),
+                RichText(
+                  text: TextSpan(
+                      text: "Phone: ",
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: phone,
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ]),
+                ),
+                const SizedBox(height: 10),
+                RichText(
+                  text: TextSpan(
+                      text: "Email: ",
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: email,
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ]),
                 ),
                 const SizedBox(
                   height: 10,
