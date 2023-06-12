@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../sharedPreferences/sharedPreferences.dart';
+import 'dart:developer';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -50,7 +51,8 @@ class _MyHomePageState extends State<ProfilePage> {
         .getStringValue("userPhone")
         .then((value) => setState(() {
               phone = value;
-            }));
+            }))
+        .then((value) => {log('Phone :$phone')});
     MySharedPreferences.instance
         .getStringValue("email")
         .then((value) => setState(() {

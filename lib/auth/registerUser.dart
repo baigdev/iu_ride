@@ -65,11 +65,11 @@ class _SignUpState extends State<SignUp> {
   }
 
   void saveUserInfo() async {
-    // uid = FirebaseAuth.instance.currentUser!.uid;
-    // phone = FirebaseAuth.instance.currentUser!.phoneNumber;
-    // await UserDatabaseService(uid: uid!)
-    //     .updateUserData(name!, email!, branch, year, carpool, vehicleNo!);
-    // print("stored user details in firestore");
+    uid = FirebaseAuth.instance.currentUser!.uid;
+    phone = FirebaseAuth.instance.currentUser!.phoneNumber;
+    await UserDatabaseService(uid: uid!)
+        .updateUserData(name!, email!, branch, year, carpool, vehicleNo!);
+    print("stored user details in firestore");
 
     //save user id from response in local storage
 

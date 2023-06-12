@@ -128,6 +128,7 @@ class _FindaRideState extends State<FindaRide> {
   @override
   void initState() {
     super.initState();
+    fetchData();
     _determinePosition();
   }
 
@@ -578,8 +579,9 @@ class _FindaRideState extends State<FindaRide> {
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context, rootNavigator: true)
-                              .pop(); // dismisses only the dialog and returns nothing
+                          Navigator.of(context, rootNavigator: true).pop();
+                          _toController.clear();
+                          _fromController.clear();
                         },
                         child: new Text('OK'),
                       ),
@@ -593,7 +595,6 @@ class _FindaRideState extends State<FindaRide> {
               ),
             )
           ]).show();
-      _toController.clear();
     }
   } //onCreatePressed
 
